@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/assets/Backgrounds/parallax-background-mountains.png" type="Texture" id=1]
+[ext_resource path="res://src/assets/Backgrounds/parallax-forest-trees-02.png" type="Texture" id=2]
+[ext_resource path="res://src/assets/Backgrounds/parallax-forest-trees-01.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/Backgrounds/parallax-background-sky.png" type="Texture" id=4]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Layer2" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 768, 0 )
+
+[node name="Texture" type="TextureRect" parent="Layer2"]
+margin_right = 768.0
+margin_bottom = 400.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Layer1" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 768, 0 )
+
+[node name="Texture" type="TextureRect" parent="Layer1"]
+margin_top = 150.0
+margin_right = 768.0
+margin_bottom = 550.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Layer3" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 768, 0 )
+
+[node name="Texture" type="TextureRect" parent="Layer3"]
+margin_top = 170.0
+margin_right = 768.0
+margin_bottom = 670.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Layer4" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 768, 0 )
+
+[node name="Texture" type="TextureRect" parent="Layer4"]
+margin_top = 270.0
+margin_right = 768.0
+margin_bottom = 870.0
+texture = ExtResource( 2 )
+expand = true

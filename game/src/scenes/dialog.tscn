@@ -1,0 +1,279 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/scenes/background.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="GDScript" id=3]
+resource_name = "user"
+script/source = "extends Control
+
+func _on_Button_Ok_pressed():
+	$ColorRect.visible = false
+
+func limpar_campos():
+	$LineEdit_ID.text        = \"\"
+	$LineEdit_Nome.text      = \"\"
+	$LineEdit_Email.text     = \"\"
+
+func salvar_http_get():
+	var url_requisicao = \"http://localhost/jogos/jogador_dao.php?\"
+	var cabecalho   = [\"Content-Type: application/json\"] #para GET usamos application/json
+	var dados_envio = \"\"
+	if (get_node(\"VBoxContainer/HBoxContainer/LineEdit_ID\").text==\"\"):
+		dados_envio = get_dados_para_envio(\"insert\")
+		get_node(\"HTTPRequest_Insert\").request(url_requisicao + dados_envio, cabecalho, false)
+		var _game: bool = get_tree().change_scene(\"res://src/scenes/menu.tscn\") # requisicao para GET
+	else:
+		dados_envio = get_dados_para_envio(\"update\")
+		$HTTP_Update.request(url_requisicao + dados_envio, cabecalho, false)# requisicao para GET
+
+func select_http_get():
+	var url_requisicao = \"http://localhost/jogos/jogador_dao.php?\"
+	var cabecalho   = [\"Content-Type: application/json\"]
+	var dados_envio = get_dados_para_envio(\"select\")    
+	get_node(\"HTTPRequest_Select\").request(url_requisicao + dados_envio, cabecalho, false)
+	#    var cabecalho   = [\"Content-Type: application/x-www-form-urlencoded\"] #para POST usamos application/json
+#    $HTTPRequest.request(url_requisicao, cabecalho, false,HTTPClient.METHOD_POST, dados_envio) # requisicao para POST
+
+func delete_http_get():
+	var url_requisicao = \"http://localhost/jogos/jogador_dao.php?\"
+	var cabecalho   = [\"Content-Type: application/json\"]
+	var dados_envio = get_dados_para_envio(\"delete\")        
+	$HTTP_Delete.request(url_requisicao + dados_envio, cabecalho, false)
+
+func get_dados_para_envio(acao):
+	var dados_envio = \"acao=\" + acao.http_escape()
+	dados_envio    += \"&id=\"         + get_node(\"VBoxContainer/HBoxContainer/LineEdit_ID\").text.http_escape()
+	dados_envio    += \"&nome=\"       + get_node(\"VBoxContainer/VBoxContainer/HBoxContainer2/LineEdit_NOME\").text.http_escape()
+	dados_envio    += \"&email=\"      + get_node(\"VBoxContainer/VBoxContainer/HBoxContainer3/LineEdit_EMAIL\").text.http_escape()
+	return dados_envio
+	
+func _on_HTTP_Insert_request_completed(result, response_code, headers, body):
+	var json = JSON.parse(body.get_string_from_utf8())
+	$ColorRect/Label_Mensagem.text     = json.result[\"resultado\"]
+	$LineEdit_ID.text                 = str(json.result[\"idGerado\"])
+	$ColorRect.visible = true
+
+func _on_HTTP_Update_request_completed(result, response_code, headers, body):
+	var json = JSON.parse(body.get_string_from_utf8())
+	$ColorRect/Label_Mensagem.text     = json.result[\"resultado\"]
+	$ColorRect.visible = true
+
+func _on_HTTP_Delete_request_completed(result, response_code, headers, body):
+	var json = JSON.parse(body.get_string_from_utf8())
+	$ColorRect/Label_Mensagem.text     = json.result[\"resultado\"]
+	$ColorRect.visible = true
+	limpar_campos()
+	
+func _on_HTTP_Select_request_completed(result, response_code, headers, body):
+	var json  = JSON.parse(body.get_string_from_utf8())    
+	var auxId = get_node(\"VBoxContainer/HBoxContainer/LineEdit_ID\").text
+	limpar_campos()
+	get_node(\"VBoxContainer/HBoxContainer/LineEdit_ID\").text = auxId
+	if (typeof(json.result[\"resultado\"]) == TYPE_STRING):
+		get_node(\"ColorRect/Label\").text     = json.result[\"resultado\"]
+		get_node(\"ColorRect\").visible = true
+	else:
+		get_node(\"VBoxContainer/VBoxContainer/HBoxContainer2/LineEdit_NOME\").text      = json.result[\"resultado\"][0].nome
+		get_node(\"VBoxContainer/VBoxContainer/HBoxContainer3/LineEdit_EMAIL\").text     = json.result[\"resultado\"][0].email
+"
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="Dialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 3 )
+
+[node name="Background2" parent="." instance=ExtResource( 1 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 127.0
+margin_right = 720.0
+margin_bottom = 141.0
+text = "CADASTRE-SE OU INSIRA SEU ID"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 173.0
+margin_right = 720.0
+margin_bottom = 213.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 185.0
+margin_right = 245.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "ID"
+align = 2
+valign = 1
+clip_text = true
+
+[node name="LineEdit_ID" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_left = 260.0
+margin_right = 420.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 160, 0 )
+custom_fonts/font = SubResource( 2 )
+
+[node name="Button_Buscar" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 435.0
+margin_right = 535.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "BUSCAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 245.0
+margin_right = 720.0
+margin_bottom = 329.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_right = 720.0
+margin_bottom = 40.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 185.0
+margin_right = 245.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "NOME"
+align = 2
+valign = 1
+clip_text = true
+
+[node name="LineEdit_NOME" type="LineEdit" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 260.0
+margin_right = 535.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 275, 0 )
+custom_fonts/font = SubResource( 2 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 720.0
+margin_bottom = 84.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 185.0
+margin_right = 245.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "E-MAIL"
+align = 2
+valign = 1
+clip_text = true
+
+[node name="LineEdit_EMAIL" type="LineEdit" parent="VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 260.0
+margin_right = 535.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 275, 0 )
+custom_fonts/font = SubResource( 2 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 361.0
+margin_right = 720.0
+margin_bottom = 401.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Button_Salvar" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 195.0
+margin_right = 295.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "SALVAR"
+
+[node name="Button_Excluir" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 310.0
+margin_right = 410.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "EXCLUIR"
+
+[node name="Button_Limpar" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 425.0
+margin_right = 525.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 1 )
+text = "LIMPAR"
+
+[node name="HTTPRequest_Insert" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest_Select" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest_Update" type="HTTPRequest" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -227.0
+margin_top = -163.5
+margin_right = 227.0
+margin_bottom = 163.5
+
+[node name="Button" type="Button" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -52.0
+margin_right = 40.0
+margin_bottom = -12.0
+rect_min_size = Vector2( 80, 40 )
+text = "OK"
+
+[node name="Label" type="Label" parent="ColorRect"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -81.0
+text = "mensagem teste"
+align = 1
+valign = 1
+uppercase = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button_Buscar" to="." method="select_http_get"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button_Salvar" to="." method="salvar_http_get"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button_Excluir" to="." method="delete_http_get"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/Button_Limpar" to="." method="limpar_campos"]
+[connection signal="request_completed" from="HTTPRequest_Insert" to="." method="_on_HTTPRequest_Insert_request_completed"]
+[connection signal="request_completed" from="HTTPRequest_Select" to="." method="_on_HTTPRequest_Select_request_completed"]
+[connection signal="request_completed" from="HTTPRequest_Update" to="." method="_on_HTTPRequest_Update_request_completed"]

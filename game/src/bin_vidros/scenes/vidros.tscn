@@ -1,0 +1,166 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/bin_vidros/scripts/vidros.gd" type="Script" id=1]
+[ext_resource path="res://src/bin_vidros/scripts/vidro.gd" type="Script" id=2]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-garrafa-partida-48.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/materiais_vidro/glass.png" type="Texture" id=4]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-bottles-48.png" type="Texture" id=5]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-vinho-48 (1).png" type="Texture" id=6]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-vinho-48.png" type="Texture" id=7]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-cheers-48.png" type="Texture" id=8]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-copo-48.png" type="Texture" id=9]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-ampulheta-vazia-48.png" type="Texture" id=10]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-frasco-de-vidro-48.png" type="Texture" id=11]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-frágil-48.png" type="Texture" id=12]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-mel-48.png" type="Texture" id=13]
+[ext_resource path="res://src/assets/materiais_vidro/icons8-drinks-48.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 24 )
+
+[node name="Vidros" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Vidro" type="Area2D" parent="."]
+position = Vector2( 59, 55 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 7 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro2" type="Area2D" parent="."]
+position = Vector2( 198, 246 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro2"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 4 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro2"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro3" type="Area2D" parent="."]
+position = Vector2( 127, 247 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro3"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 10 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro3"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro4" type="Area2D" parent="."]
+position = Vector2( 194, 185 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro4"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 8 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro4"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro5" type="Area2D" parent="."]
+position = Vector2( 124, 187 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro5"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 9 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro5"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro6" type="Area2D" parent="."]
+position = Vector2( 190, 120 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro6"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 11 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro6"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro7" type="Area2D" parent="."]
+position = Vector2( 123, 120 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro7"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 12 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro7"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro8" type="Area2D" parent="."]
+position = Vector2( 186, 57 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro8"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 13 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro8"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro9" type="Area2D" parent="."]
+position = Vector2( 124, 55 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro9"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 6 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro9"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro10" type="Area2D" parent="."]
+position = Vector2( 61, 125 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro10"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 3 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro10"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro11" type="Area2D" parent="."]
+position = Vector2( 63, 186 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro11"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 14 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro11"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )
+
+[node name="Vidro12" type="Area2D" parent="."]
+position = Vector2( 63, 245 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Vidro12"]
+position = Vector2( 24, 24 )
+texture = ExtResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="Vidro12"]
+position = Vector2( 24, 24 )
+shape = SubResource( 1 )

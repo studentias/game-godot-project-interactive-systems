@@ -1,0 +1,231 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_000.png" type="Texture" id=1]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_001.png" type="Texture" id=2]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_006.png" type="Texture" id=3]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_007.png" type="Texture" id=4]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_003.png" type="Texture" id=5]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_002.png" type="Texture" id=6]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_004.png" type="Texture" id=7]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_009.png" type="Texture" id=8]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_008.png" type="Texture" id=9]
+[ext_resource path="res://src/assets/png/autumn/run/1_autumn_Run_005.png" type="Texture" id=10]
+[ext_resource path="res://src/scenes/background.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/assets/Tiles/Tile-08.png" type="Texture" id=12]
+[ext_resource path="res://src/assets/Tiles/Tile-09.png" type="Texture" id=13]
+[ext_resource path="res://src/assets/Tiles/Tile-10.png" type="Texture" id=14]
+[ext_resource path="res://src/assets/thoughts-left.png" type="Texture" id=15]
+[ext_resource path="res://src/assets/bins.png" type="Texture" id=16]
+[ext_resource path="res://src/assets/fonts/Patrick_Hand/PatrickHand-Regular.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://src/scripts/root.gd" type="Script" id=18]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
+points = PoolVector2Array( 0, 0, 24, 0, 24, 24, 0, 24 )
+
+[sub_resource type="TileSet" id=5]
+0/name = "left"
+0/texture = ExtResource( 12 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 24, 24 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 13 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 13 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "right"
+1/texture = ExtResource( 13 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 24, 24 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 14 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 14 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "middle"
+2/texture = ExtResource( 14 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 24, 24 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 15 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 15 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -90, 438 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "entered"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -90, 438 ), Vector2( 100, 438 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="DynamicFont" id=11]
+font_data = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 22
+font_data = ExtResource( 17 )
+
+[node name="Root" type="Node2D"]
+script = ExtResource( 18 )
+
+[node name="Background" parent="." instance=ExtResource( 11 )]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -90, 438 )
+scale = Vector2( 0.3, 0.3 )
+frames = SubResource( 1 )
+frame = 6
+flip_h = true
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Terrain" type="TileMap" parent="Map"]
+tile_set = SubResource( 5 )
+cell_size = Vector2( 24, 24 )
+format = 1
+tile_data = PoolIntArray( 1507328, 0, 0, 1507329, 2, 0, 1507330, 2, 0, 1507331, 2, 0, 1507332, 2, 0, 1507333, 2, 0, 1507334, 2, 0, 1507335, 2, 0, 1507336, 2, 0, 1507337, 2, 0, 1507338, 2, 0, 1507339, 2, 0, 1507340, 2, 0, 1507341, 2, 0, 1507342, 2, 0, 1507343, 2, 0, 1507344, 2, 0, 1507345, 2, 0, 1507346, 2, 0, 1507347, 2, 0, 1507348, 2, 0, 1507349, 2, 0, 1507350, 2, 0, 1507351, 2, 0, 1507352, 2, 0, 1507353, 2, 0, 1507354, 2, 0, 1507355, 2, 0, 1507356, 2, 0, 1507357, 2, 0, 1507358, 2, 0, 1507359, 1, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "entered"
+anims/RESET = SubResource( 6 )
+anims/entered = SubResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 384, 288 )
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Sprite"]
+unique_name_in_owner = true
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -316.0
+margin_top = -259.0
+margin_right = -51.0
+margin_bottom = -87.0
+custom_fonts/font = SubResource( 11 )
+text = "Muito bem!
+Agora você já sabe coletar os residuos para a coleta seletiva. Pega os residuos com a lixeira correspondente e ajude a natureza."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 384, 520 )
+texture = ExtResource( 16 )
+
+[node name="Button" type="Button" parent="."]
+modulate = Color( 0.878431, 0.168627, 0.290196, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 386.0
+margin_top = 374.0
+margin_right = 468.0
+margin_bottom = 394.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 12 )
+text = "Iniciar Jogo"
+
+[connection signal="pressed" from="Button" to="." method="on_button_pressed"]

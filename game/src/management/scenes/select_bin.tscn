@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/management/scripts/select_bin.gd" type="Script" id=1]
+[ext_resource path="res://src/bin_metais/scenes/bin_metal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/bin_vidros/scenes/bin_vidro.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/bin_paper/scenes/bin_paper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/bin_plastico/scenes/bin_plastico.tscn" type="PackedScene" id=5]
+
+[node name="select_bin" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Bin_metal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 403, 520 )
+
+[node name="Bin_papel" parent="." instance=ExtResource( 4 )]
+position = Vector2( 323, 520 )
+
+[node name="Bin_plastico" parent="." instance=ExtResource( 5 )]
+position = Vector2( 240, 520 )
+
+[node name="Bin_vidro" parent="." instance=ExtResource( 3 )]
+position = Vector2( 154, 520 )
